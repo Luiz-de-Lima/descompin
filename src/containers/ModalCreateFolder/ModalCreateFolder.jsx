@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form'
 
 
 export const ModalCreateFolder = ({ open }) => {
+
   const [folderName, setFoldername] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -22,7 +23,7 @@ export const ModalCreateFolder = ({ open }) => {
         loadingLabel: 'Salvando',
         loading: false,
         type: 'submit',
-        variant:'secondary',
+        variant: 'secondary',
         form: 'form-criar-pasta',
       }]}>
       <Form onSubmit={handleSubmit} id="form-criar-pasta">

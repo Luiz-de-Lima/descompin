@@ -4,10 +4,12 @@ import { Card } from '../../components/Card/Card'
 import { ModalSavePin } from '../../containers/ModalSavePin/ModalSavePin'
 import { ModalCreateFolder } from '../../containers/ModalCreateFolder/ModalCreateFolder'
 import { Notification } from '../../components/Notification/Notification'
+
 export const HomePage = () => {
   return (
     <>
-      <ModalCreateFolder open={false} />
+      <ModalSavePin open={true} />
+      <ModalCreateFolder open={true} />
       <Notification message='Criado com sucesso'
         onClose={() => console.log('clicou')} />
       <Container fluid>
