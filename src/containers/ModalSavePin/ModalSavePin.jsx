@@ -3,12 +3,19 @@ import { Modal } from '../../components/Modal/Modal'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Col, Row } from 'react-bootstrap';
 import { Button } from '../../components/Button/Button';
+import { useAppContext } from '../../store/AppContext'
+import { closeModalAction } from '../../store/actions';
 
 export const ModalSavePin = ({ open }) => {
+  const { dispatch } = useAppContext()
+  const handleClose = () => {
+    dispatch(closeModalAction())
+  }
   return (
     <Modal
       title='Salvar pin'
       open={open}
+      onHide={handleClose}
       controls={[{
         label: 'criar pasta', variant: 'primary',
         loading: false,

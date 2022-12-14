@@ -3,13 +3,13 @@ import ModalBS from 'react-bootstrap/Modal'
 import { Button } from '../Button/Button'
 
 
-export const Modal = ({ title, children, open, controls = [] }) => {
+export const Modal = ({ title, children, open, controls = [],onHide }) => {
   return (
     <div
       className="modal show"
-      style={{ display: 'block', position: 'initial' }}
+      style={{ display: open ? 'block' : 'none', position: 'initial' }}
     >
-      <ModalBS.Dialog show={open}>
+      <ModalBS show={open} onHide={onHide}>
         <ModalBS.Header closeButton>
           <ModalBS.Title>{title}</ModalBS.Title>
         </ModalBS.Header>
@@ -26,7 +26,7 @@ export const Modal = ({ title, children, open, controls = [] }) => {
 
           ))}
         </ModalBS.Footer>
-      </ModalBS.Dialog>
+      </ModalBS>
     </div>
 
   )

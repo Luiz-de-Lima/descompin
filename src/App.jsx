@@ -1,24 +1,31 @@
 import { useState } from "react";
-import { HomePage } from "./Home/pages/HomePage";
+import { HomePage } from "./pages/Home/HomePage";
 import { HeaderPartial } from "./Partials/HeaderPartial/HeaderPartial";
-import { saveFolder,savePinFolder } from "./services/pinservices";
+import { AppContext } from "./store/AppContext";
 import {
   Route,
   BrowserRouter,
   Routes,
 } from "react-router-dom";
-import { MinhasPastas } from "./Home/MinhasPastas/MinhasPastas";
-
+import { MinhasPastas } from "./pages/MinhasPastas/MinhasPastas";
+const initialState = {
+  activePin: null,
+  mode: null,
+  folders: [],
+  type: null
+}
 const App = () => {
-  saveFolders('2e13-a363','pin1')
+
   return (
     <BrowserRouter>
       <div className="App">
-        <HeaderPartial />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/minhas-pastas" element={<MinhasPastas />} />
-        </Routes>
+        <AppContext initialState={initialState}>
+          <HeaderPartial />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/minhas-pastas" element={<MinhasPastas />} />
+          </Routes>
+        </AppContext>
       </div>
     </BrowserRouter>
   );
