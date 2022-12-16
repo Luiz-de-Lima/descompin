@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import { Card } from '../../components/Card/Card'
 import { ModalSavePin } from '../../containers/ModalSavePin/ModalSavePin'
@@ -6,16 +6,33 @@ import { ModalCreateFolder } from '../../containers/ModalCreateFolder/ModalCreat
 import { Notification } from '../../components/Notification/Notification'
 import { CardContainer } from '../../containers/Card/CardContainer'
 import { useAppContext } from '../../store/AppContext'
+import { saveFolderSuccessType } from '../../store/types'
 
 export const HomePage = () => {
   const { state, dispatch } = useAppContext()
+  const [showFeedback, setShowFeedback] = useState(false)
+  console.log(state.type, 'state.type')
+
+  useEffect(() => {
+
+    if (state.type === saveFolderSuccessType) {
+      setShowFeedback(true)
+    }
+    console.log(state.type)
+    console.log(showFeedback)
+
+
+  }, [state.type])
 
   return (
     <>
       <ModalSavePin open={state.mode === 'savePin'} />
-      <ModalCreateFolder open={false} />
-      <Notification message='Criado com sucesso'
-        onClose={() => console.log('clicou')} />
+      <ModalCreateFolder open={state.mode === 'createFolder'} />
+      {
+        showFeedback && (<Notification message='Criado com sucesso'
+          onClose={() => setShowFeedback(false)} />)
+      }
+
       <Container fluid>
         <Row>
           <Col xs={12} md={2}>

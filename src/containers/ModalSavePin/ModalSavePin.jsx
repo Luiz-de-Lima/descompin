@@ -4,13 +4,17 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Col, Row } from 'react-bootstrap';
 import { Button } from '../../components/Button/Button';
 import { useAppContext } from '../../store/AppContext'
-import { closeModalsAction } from '../../store/actions';
+import { closeModalsAction, openModalCreateFolderAction } from '../../store/actions';
 import { fecthFoldersAction } from '../../store/actions'
 
 export const ModalSavePin = ({ open }) => {
   const { state, dispatch } = useAppContext()
   const handleClose = () => {
     dispatch(closeModalsAction())
+  }
+  const handleCreateFolder = () => {
+    console.log('teste')
+    dispatch(openModalCreateFolderAction())
   }
   useEffect(() => {
     fecthFoldersAction(dispatch)
@@ -24,7 +28,7 @@ export const ModalSavePin = ({ open }) => {
         label: 'criar pasta', variant: 'primary',
         loading: false,
         loadingLabel: 'teste',
-        onClick: () => console.log("save pin")
+        onClick: () => handleCreateFolder()
       }]}>
       <ListGroup variant="flush">
         {state.folders.map((folder, folderIndex) => (
