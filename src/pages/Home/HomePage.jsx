@@ -18,9 +18,6 @@ export const HomePage = () => {
     if (state.type === saveFolderSuccessType) {
       setShowFeedback(true)
     }
-    console.log(state.type)
-    console.log(showFeedback)
-
 
   }, [state.type])
 
@@ -29,17 +26,19 @@ export const HomePage = () => {
       <ModalSavePin open={state.mode === 'savePin'} />
       <ModalCreateFolder open={state.mode === 'createFolder'} />
       {
-        showFeedback && (<Notification message='Criado com sucesso'
-          onClose={() => setShowFeedback(false)} />)
+        showFeedback && (
+          <Notification message='Criado com sucesso'
+            onClose={() => setShowFeedback(false)} />
+        )
       }
 
       <Container fluid>
         <Row>
           <Col xs={12} md={2}>
-            <CardContainer title='matematica' total={0} imagem={'https://pixabay.com/pt/photos/cachorro-canino-bicho-de-estima%c3%a7%c3%a3o-5040008/'} />
+            <CardContainer id="123" title='matematica' total={0} imagem={'https://pixabay.com/pt/photos/cachorro-canino-bicho-de-estima%c3%a7%c3%a3o-5040008/'} />
           </Col>
           <Col xs={12} md={2}>
-            <CardContainer title='trigonometria' total={0} imagem={'https://pixabay.com/pt/photos/cachorro-canino-bicho-de-estima%c3%a7%c3%a3o-5040008/'} />
+            <CardContainer id="133" title='trigonometria' total={0} imagem={'https://pixabay.com/pt/photos/cachorro-canino-bicho-de-estima%c3%a7%c3%a3o-5040008/'} />
           </Col>
         </Row>
       </Container>

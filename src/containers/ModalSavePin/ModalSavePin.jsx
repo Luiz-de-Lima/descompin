@@ -4,8 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Col, Row } from 'react-bootstrap';
 import { Button } from '../../components/Button/Button';
 import { useAppContext } from '../../store/AppContext'
-import { closeModalsAction, openModalCreateFolderAction } from '../../store/actions';
-import { fecthFoldersAction } from '../../store/actions'
+import { closeModalsAction, openModalCreateFolderAction, fecthFoldersAction } from '../../store/actions';
 
 export const ModalSavePin = ({ open }) => {
   const { state, dispatch } = useAppContext()
@@ -18,7 +17,12 @@ export const ModalSavePin = ({ open }) => {
   }
   useEffect(() => {
     fecthFoldersAction(dispatch)
+    console.log(state)
   }, [])
+  useEffect(() => {
+
+    console.log(state)
+  }, [state])
   return (
     <Modal
       title='Salvar pin'

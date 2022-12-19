@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal } from '../../components/Modal/Modal'
 import Form from 'react-bootstrap/Form'
 import { useAppContext } from '../../store/AppContext'
 import { closeModalsAction, saveFolderAction } from '../../store/actions'
+import { saveFolderInitType, saveFolderSuccessType } from '../../store/types'
 
 
 export const ModalCreateFolder = ({ open }) => {
-  const { dispatch } = useAppContext()
+  const { state, dispatch } = useAppContext()
   const [folderName, setFoldername] = useState('')
 
   const handleClose = () => {
@@ -15,11 +16,17 @@ export const ModalCreateFolder = ({ open }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     saveFolderAction(dispatch, folderName)
-    handleClose()
+
   }
   const handleChange = (e) => {
     setFoldername(e.target.value)
   }
+
+  useEffect(() => {
+    if (state.type === saveFolderSuccessType) {
+      handleClose()
+    }
+  }, [state.type])
 
   return (
     <Modal
@@ -29,7 +36,7 @@ export const ModalCreateFolder = ({ open }) => {
       controls={[{
         label: 'Criar e Salvar',
         loadingLabel: 'Salvando',
-        loading: false,
+        loading: state.type === saveFolderInitType,
         type: 'submit',
         variant: 'secondary',
         form: 'form-criar-pasta',

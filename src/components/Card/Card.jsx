@@ -5,13 +5,13 @@ import BadgeBs from 'react-bootstrap/Badge'
 import paisagem from '../../assets/paisagem.jpg'
 
 
-export const Card = ({ imagem, title, total, onClick }) => {
+export const Card = ({ id, imagem, title, total, onClick }) => {
 
   return (
     <CardBS className="">
       <CardBS.Img src={paisagem} alt="CardBS image" />
       <CardBS.ImgOverlay>
-        <ButtonBS variant="primary" onClick={onClick}>
+        <ButtonBS variant="primary" onClick={() => onClick(id)}>
           Salvar <BadgeBs bg="secondary">{total}</BadgeBs>
         </ButtonBS>
       </CardBS.ImgOverlay>
