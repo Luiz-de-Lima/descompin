@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from '../../components/Modal/Modal'
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Col, Row } from 'react-bootstrap';
@@ -8,6 +8,7 @@ import { closeModalsAction, openModalCreateFolderAction, fecthFoldersAction, sav
 
 export const ModalSavePin = ({ open }) => {
   const { state, dispatch } = useAppContext()
+  const [itemsLoading, setItemsLoading] = useState({})
   const handleClose = () => {
     dispatch(closeModalsAction())
   }
@@ -15,9 +16,18 @@ export const ModalSavePin = ({ open }) => {
     console.log('teste')
     dispatch(openModalCreateFolderAction())
   }
-  const handleClick = (folderId) => {
-    savePinInFolderAction(dispatch, state.activePinId, folderId)
-    console.log('salvar', folderId, state.activePinId)
+  const handleClick = async (folderId) => {
+    setItemsLoading((prevState) => {
+      return { ...prevState, [folderId]: true }
+    })
+
+    await savePinInFolderAction(dispatch, state.activePinId, folderId)
+    setItemsLoading((prevState) => {
+      return {
+        ...prevState,
+        [folderId]: false
+      }
+    })
   }
   const folderNormalized = state.folders.map((folder) => {
     return ({
@@ -52,8 +62,9 @@ export const ModalSavePin = ({ open }) => {
                   label={folder.saved ? 'Salvo' : 'Salvar'}
                   loadingLabel='Salvando'
                   onClick={() => handleClick(folder.id)}
-                  variant={folder.save ? 'primary' : 'secondary '}
-                  disabled={folder.saved} />
+                  variant={folder.saved ? 'secondary' : 'primary'}
+                  disabled={folder.saved}
+                  loading={itemsLoading[folder.id]} />
               </Col>
 
             </Row>

@@ -1,4 +1,3 @@
-import React from 'react'
 import * as types from './types'
 
 export const reducer = (state, action) => {
@@ -45,6 +44,12 @@ export const reducer = (state, action) => {
         ...state,
         type: types.savePinInFolderSuccessType,
         folders: action.payload
+      }
+    case types.fetchPinsSuccessType:
+      return {
+        ...state,
+        pins: action.payload,
+
       }
     default:
       return { ...state, type: action.type }

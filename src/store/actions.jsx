@@ -20,7 +20,7 @@ export const closeModalsAction = () => ({
   type: types.closeModalsType
 })
 
-export const fecthFoldersInitAction = () => ({
+export const fetchFoldersInitAction = () => ({
   type: types.fetchFoldersInitType
 })
 
@@ -32,7 +32,7 @@ export const fecthFoldersSuccesstAction = (folders) => ({
 
 
 export const fecthFoldersAction = async (dispatch) => {
-  dispatch(fecthFoldersInitAction())
+  dispatch(fetchFoldersInitAction())
   const folders = await pinService.getFolders()
   dispatch(fecthFoldersSuccesstAction(folders))
 }
@@ -75,6 +75,24 @@ export const savePinInFolderAction = async (dispatch, pinId, folderId) => {
   dispatch(savePinInFolderInitAction())
   await sleep(1000)
   await pinService.savePinFolder(folderId, pinId)
-  const folders=await pinService.getFolders()
+  const folders = await pinService.getFolders()
   dispatch(savePinInFolderSuccessAction(folders))
+}
+
+//-----**-----\\
+
+export const fetchPinsInitAction = () => ({
+  type: types.fetchPinsInitType
+})
+
+export const fetchPinsSuccessAction = (pinsData) => ({
+  type: types.fetchPinsSuccessType,
+  payload: pinsData
+})
+
+export const fetchPinsAction = async (dispatch) => {
+  dispatch(fetchPinsInitAction())
+  await sleep(1000)
+  const pinsData = await pinService.getPins()
+  dispatch(fetchPinsSuccessAction(pinsData))
 }
