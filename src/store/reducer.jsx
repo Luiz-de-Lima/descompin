@@ -37,8 +37,14 @@ export const reducer = (state, action) => {
     case types.saveFolderSuccessType:
       return {
         ...state,
-        types: types.saveFolderSuccessType,
+        type: types.saveFolderSuccessType,
         folders: [...state.folders, action.payload]
+      }
+    case types.savePinInFolderSuccessType:
+      return {
+        ...state,
+        type: types.savePinInFolderSuccessType,
+        folders: action.payload
       }
     default:
       return { ...state, type: action.type }
