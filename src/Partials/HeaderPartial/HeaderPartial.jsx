@@ -11,9 +11,8 @@ export const HeaderPartial = () => {
           <Navbar.Brand href="">DesconPin</Navbar.Brand>
           <Nav className="me-auto">
             <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="#features">Features</Link>
             <Link className="nav-link" to="minhas-pastas">Minhas Pastas</Link>
-          </Nav>
+          </Nav>z
         </Container>
       </Navbar>
 
